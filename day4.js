@@ -20,6 +20,8 @@ console.log(obj.greet());
 
 // 14.  Explain call(), apply() and, bind() methods.
 // ans-1.)  call() is like borrowing a function from one object and using it with another
+// The call() method is a built-in function in JavaScript that allows you to invoke a function with a specific this value 
+
 let person1 = {
     name: "tanya",
     Age: 21,
