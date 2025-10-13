@@ -8,7 +8,7 @@ var name = "kirti"; //cannot through error
 console.log(name);
 
 let surname = "mandloi"; 
-let surname = "mandloi"; //through error
+// let surname = "mandloi"; //through error
 console.log(surname);
 
 function demo() {
@@ -17,7 +17,7 @@ function demo() {
         let y = 10;
     }
      
-    console.log(y); //y can't be access let has block scope
+    // console.log(y); //y can't be access let has block scope
     console.log(x); //x can access var has function scope
 }
 

@@ -1,17 +1,15 @@
 // 22.  What are object prototypes?
 // An object prototype in JavaScript is a mechanism that allows objects to inherit properties and methods from other objects.
 let animal = {
-  speak: function() {
+  speak: function () {
     console.log("Animal speaks");
-  }
+  },
 };
 
 let dog = Object.create(animal);
 dog.name = "Buddy";
 
-dog.speak();  // Output: Animal speaks
-
-
+dog.speak(); // Output: Animal speaks
 
 // 23.  What are callbacks?
 // A callback is a function passed as an argument to another function, executed after the first function completes.
@@ -42,7 +40,7 @@ fetchData(afterFetch);
 function add(a, b) {
   let cache = {};
 
-  return function(a, b) {
+  return function (a, b) {
     let key = a + "," + b;
     if (cache[key]) {
       console.log("Fetching from cache");
