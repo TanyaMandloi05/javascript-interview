@@ -26,44 +26,72 @@ let person1 = {
     name: "tanya",
     Age: 21,
     feild: "software engineer",
+
     printDetails: function() {
+        // 'this' refers to the object that calls this method.
         console.log(`your name is ${this.name} and your age is ${this.Age}`);
     }
-}
+};
 
-person1.printDetails();
+person1.printDetails(); 
+// Here, 'this' refers to person1.
+
+// Output:
+// your name is tanya and your age is 21
+
 
 let person2 = {
     name: "kirti",
     Age: 18,
     feild: "software engineer",
-}
+};
+
+// call() allows us to borrow a method from another object.
+// Here, we call person1's printDetails method using person2 as 'this'.
 
 person1.printDetails.call(person2);
 
+// Output:
+// your name is kirti and your age is 18
+
 //2.) Apply- apply() is used to call a function and set this, just like call(), but it takes arguments as an array.
+// Object 1
 let person3 = {
     name: "rohit",
     Age: 21,
     feild: "system designer",
-}
+};
 
- let printInfo = function(state, country) {
-       console.log(`your name is ${this.name} and your are from ${state} in ${country}`);
-}
+// Creating a function outside the object
+let printInfo = function(state, country) {
 
-printInfo.call(person3, "mp","India");
+    // 'this' refers to the object passed using call() or apply().
+    console.log(`your name is ${this.name} and you are from ${state} in ${country}`);
+};
 
+// call() passes arguments individually.
+printInfo.call(person3, "mp", "India");
+
+// Output:
+// your name is rohit and you are from mp in India
+
+
+// Object 2
 let person4 = {
     name: "armaan",
     Age: 18,
     feild: "ui/ux designer",
-}
+};
 
-printInfo.apply(person4, ["delhi","India"]);
+// apply() passes arguments as an array.
+printInfo.apply(person4, ["delhi", "India"]);
+
+// Output:
+// your name is armaan and you are from delhi in India
+
+
 
 //3.) we can make copy of function in  bind and we can call it latter  
-
 let newFun = printInfo.bind(person4, "mumbai","India");
 newFun();
 
@@ -96,13 +124,27 @@ console.log(result);
 // It transforms a function like add(a, b, c) into a chain of functions like add(a)(b)(c)
 
 function sendEmail(to) {
-    return function(subject){
-        return function(body){
-            console.log(`sending email to ${to} with subject ${subject} :${body}`);
-        }
-    }
+    // Outer function takes the receiver's email/name.
+    return function(subject) {
+        // Second function takes the email subject.
+        return function(body) {
+            // Inner function takes the email body.
+            console.log(`sending email to ${to} with subject ${subject} : ${body}`);
+        };
+    };
 }
 
+// Step 1: Calls sendEmail() and stores the returned function.
+// to = "tanya"
 let step1 = sendEmail("tanya");
+
+// Step 2: Calls the second function and stores the returned function.
+// subject = "order confirmation"
 let step2 = step1("order confirmation");
-step2("hey tanya here is something for you"); 
+
+// Step 3: Calls the third function with the email body.
+// body = "hey tanya here is something for you"
+step2("hey tanya here is something for you");
+
+// Output:
+// sending email to tanya with subject order confirmation : hey tanya here is something for you
